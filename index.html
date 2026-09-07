@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Изучай французский язык с Бусой</title>
+<link rel="icon" href="favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&family=PT+Mono&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/notebook.css">
+<script src="assets/notebook.js"></script>
+<style>
+  /* стили только для этой страницы — навигационная сетка карточек */
+  .color-key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+  .color-key .item { display: flex; align-items: center; gap: 8px; }
+  .key-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .key-dot.pos { background: var(--accent-pos); }
+  .key-dot.mem { background: var(--accent-mem); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    text-decoration: none;
+    color: inherit;
+    border-top: 3px solid var(--track-color, var(--accent-pos));
+    transition: transform 0.12s ease;
+  }
+  .card:hover { transform: translateY(-2px); }
+
+  .card .tag {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-family: "PT Mono", monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .card.ru .tag { background: var(--accent-pos-soft); color: var(--accent-pos); }
+  .card.fr .tag { background: var(--accent-mem-soft); color: var(--accent-mem); }
+  .card.ru { --track-color: var(--accent-pos); }
+  .card.fr { --track-color: var(--accent-mem); }
+
+  .card h3 {
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+
+  .card p {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+    flex: 1;
+  }
+
+  .card .open {
+    font-family: "PT Mono", monospace;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .card.ru .open { color: var(--accent-pos); }
+  .card.fr .open { color: var(--accent-mem); }
+
+  .card.planned {
+    border-style: dashed;
+    box-shadow: none;
+    opacity: 0.72;
+    border-top-style: dashed;
+  }
+  .card.planned .tag { background: var(--surface-2); color: var(--text-muted); }
+  .card.planned .open { color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <p class="eyebrow">Français · с Бусой</p>
+    <h1>Изучай французский язык с Бусой</h1>
+    <p class="lede">Сюда складываются все шпаргалки, которые появляются по ходу изучения — от повторения русской грамматики до самого французского. Каждая карточка ниже — отдельная страница, открывается прямо в браузере.</p>
+    <div class="color-key">
+      <span class="item"><span class="key-dot pos"></span>фиолетовый — материалы по русской грамматике (опора)</span>
+      <span class="item"><span class="key-dot mem"></span>зелёный — материалы по французскому</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Материалы</h2>
+    <div class="grid">
+
+      <a class="card ru" href="pages/russian-grammar-cheatsheet.html">
+        <span class="tag">Русский · грамматика</span>
+        <h3>Части речи и члены предложения</h3>
+        <p>Две системы классификации слов, их определения, вопросы и разбор одного предложения сразу по обеим — чтобы связь была видна физически.</p>
+        <span class="open">Открыть →</span>
+      </a>
+
+      <div class="card planned">
+        <span class="tag">Скоро</span>
+        <h3>Sujet, verbe, complément…</h3>
+        <p>Те же пять членов предложения, но на французский лад — с разбором того же примера и отличиями вроде порядка прилагательных.</p>
+        <span class="open">В работе</span>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+</body>
+</html>

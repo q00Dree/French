@@ -1,0 +1,452 @@
+/* Общий дизайн для всех страниц.
+   Ссылается отсюда каждая страница: <link rel="stylesheet" href="../assets/notebook.css">
+   Правь здесь, чтобы поменять внешний вид сразу везде. */
+
+:root {
+  --bg: #F4F5F9;
+  --surface: #FFFFFF;
+  --surface-2: #ECEEF5;
+  --text: #1C2033;
+  --text-muted: #5B6178;
+  --border: #DCDFEA;
+  --border-soft: #E7E9F2;
+  --accent-pos: #5B4FC7;
+  --accent-pos-soft: #EEEBFC;
+  --accent-mem: #157A6E;
+  --accent-mem-soft: #E1F3F0;
+  --accent-fn: #8478D9;
+  --shadow: 0 1px 2px rgba(28,32,51,0.06), 0 10px 28px -14px rgba(28,32,51,0.16);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14161F;
+    --surface: #1B1E2A;
+    --surface-2: #232734;
+    --text: #E7E9F2;
+    --text-muted: #9BA1B8;
+    --border: #2E3241;
+    --border-soft: #262A38;
+    --accent-pos: #A499F5;
+    --accent-pos-soft: rgba(164,153,245,0.16);
+    --accent-mem: #4FD3C4;
+    --accent-mem-soft: rgba(79,211,196,0.14);
+    --accent-fn: #B7AEF5;
+    --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 10px 28px -14px rgba(0,0,0,0.55);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #14161F;
+  --surface: #1B1E2A;
+  --surface-2: #232734;
+  --text: #E7E9F2;
+  --text-muted: #9BA1B8;
+  --border: #2E3241;
+  --border-soft: #262A38;
+  --accent-pos: #A499F5;
+  --accent-pos-soft: rgba(164,153,245,0.16);
+  --accent-mem: #4FD3C4;
+  --accent-mem-soft: rgba(79,211,196,0.14);
+  --accent-fn: #B7AEF5;
+  --shadow: 0 1px 2px rgba(0,0,0,0.35), 0 10px 28px -14px rgba(0,0,0,0.55);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "PT Sans", "Segoe UI", Arial, sans-serif;
+  line-height: 1.55;
+}
+
+.page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 56px 24px 96px;
+}
+
+@media (max-width: 560px) {
+  .page { padding: 72px 16px 64px; }
+}
+
+h1, h2, h3 {
+  font-family: "PT Serif", Georgia, "Times New Roman", serif;
+  font-weight: 700;
+  text-wrap: balance;
+  color: var(--text);
+  margin: 0;
+}
+
+.eyebrow {
+  font-family: "PT Mono", ui-monospace, monospace;
+  font-size: 12px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 10px;
+}
+
+header.hero {
+  margin-bottom: 40px;
+}
+
+header.hero h1 {
+  font-size: clamp(28px, 4.5vw, 40px);
+  line-height: 1.15;
+}
+
+header.hero p.lede {
+  max-width: 62ch;
+  font-size: 17px;
+  color: var(--text-muted);
+  margin: 14px 0 0;
+}
+
+section {
+  margin-top: 52px;
+}
+
+section > h2 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+section > p.section-note {
+  max-width: 68ch;
+  color: var(--text-muted);
+  font-size: 15px;
+  margin: 6px 0 22px;
+}
+
+/* concept card — сопоставление двух понятий бок о бок */
+.concept {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 620px) {
+  .concept { grid-template-columns: 1fr; }
+}
+
+.concept .col {
+  padding: 18px;
+  border-radius: 10px;
+}
+
+@media (max-width: 560px) {
+  .concept { padding: 16px; gap: 12px; }
+  .concept .col { padding: 14px; }
+}
+
+.concept .col.pos { background: var(--accent-pos-soft); }
+.concept .col.mem { background: var(--accent-mem-soft); }
+
+.concept .col h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.concept .col.pos h3 { color: var(--accent-pos); }
+.concept .col.mem h3 { color: var(--accent-mem); }
+
+.concept .col p { margin: 0 0 8px; font-size: 14.5px; }
+.concept .col p:last-child { margin-bottom: 0; }
+.concept .col .analogy {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.concept .divider {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-family: "PT Mono", monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+  margin-top: -4px;
+}
+
+/* tables */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+  font-size: 14.5px;
+}
+
+@media (max-width: 560px) {
+  table { min-width: 560px; font-size: 13.5px; }
+  thead th { padding: 10px 12px; }
+  tbody td { padding: 10px 12px; }
+}
+
+thead th {
+  text-align: left;
+  font-family: "PT Mono", monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 400;
+  padding: 12px 16px;
+  background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-soft);
+  vertical-align: top;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+
+tr.group-row td {
+  background: var(--surface-2);
+  font-family: "PT Mono", monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 8px 16px;
+}
+
+.term {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.term .term-en {
+  display: block;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.q {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.ex {
+  font-family: "PT Mono", monospace;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.chip {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.chip.pos { background: var(--accent-pos-soft); color: var(--accent-pos); }
+.chip.mem { background: var(--accent-mem-soft); color: var(--accent-mem); }
+
+table.pos-table tr.self td:first-child { border-left: 3px solid var(--accent-pos); }
+table.pos-table tr.fn td:first-child { border-left: 3px solid var(--accent-fn); }
+table.pos-table tr.int td:first-child { border-left: 3px solid var(--text-muted); }
+
+table.mem-table tr.main td:first-child { border-left: 3px solid var(--accent-mem); }
+table.mem-table tr.sec td:first-child { border-left: 3px solid var(--accent-mem); }
+
+/* Колонки с короткими вопросами/пометками слишком сильно сжимались в auto-layout
+   и переносились по слову-два — задаём им минимальную ширину, чтобы фразы вроде
+   «какой? чей?» не рвались на середине без необходимости. */
+table.pos-table th:nth-child(2), table.pos-table td:nth-child(2) { min-width: 150px; }
+table.pos-table th:nth-child(4), table.pos-table td:nth-child(4) { min-width: 130px; }
+
+table.mem-table th:nth-child(2), table.mem-table td:nth-child(2) { min-width: 170px; }
+table.mem-table th:nth-child(4), table.mem-table td:nth-child(4) { min-width: 110px; }
+table.mem-table th:nth-child(5), table.mem-table td:nth-child(5) { min-width: 100px; }
+
+table.role-table th:nth-child(2), table.role-table td:nth-child(2) { min-width: 150px; }
+table.role-table th:nth-child(3), table.role-table td:nth-child(3) { min-width: 220px; }
+
+/* underline demo swatches — школьный способ подчёркивания членов предложения */
+.swatch {
+  font-family: "PT Serif", serif;
+  font-size: 14px;
+}
+.u-single { text-decoration: underline; text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
+.u-double { text-decoration: underline; text-decoration-style: double; text-underline-offset: 3px; }
+.u-dashed { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 3px; }
+.u-wavy   { text-decoration: underline; text-decoration-style: wavy; text-underline-offset: 3px; }
+.u-dotted { text-decoration: underline; text-decoration-style: dotted; text-underline-offset: 3px; }
+
+/* parsed sentence — разбор примера по частям речи и членам предложения */
+.sentence-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 28px 24px 24px;
+  box-shadow: var(--shadow);
+}
+
+@media (max-width: 560px) {
+  .sentence-card { padding: 22px 16px 18px; }
+}
+
+.sentence-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 4px;
+  align-items: flex-end;
+  font-family: "PT Serif", serif;
+  font-size: clamp(19px, 3vw, 24px);
+  margin-bottom: 26px;
+}
+
+.word {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px 4px;
+}
+
+.word .w {
+  padding-bottom: 3px;
+}
+
+.word .tags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.w-line { display: inline; }
+
+.word .punct {
+  text-decoration: none;
+}
+
+.word.group .w {
+  white-space: nowrap;
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 24px;
+  font-size: 13.5px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-soft);
+  padding-top: 18px;
+}
+
+@media (max-width: 560px) {
+  .legend { grid-template-columns: 1fr; }
+}
+
+.legend .item { display: flex; align-items: center; gap: 8px; }
+.legend .sample { font-family: "PT Serif", serif; font-size: 14px; }
+
+footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-soft);
+  color: var(--text-muted);
+  font-size: 13.5px;
+  max-width: 68ch;
+}
+
+footer strong { color: var(--text); }
+
+/* Верхний правый угол — кнопка возврата на главную и переключатель темы.
+   Оба элемента добавляются в DOM скриптом assets/notebook.js, ничего не нужно
+   писать в разметке страницы, кроме <script src="../assets/notebook.js" data-home="../index.html"></script> */
+.nb-nav {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  font-family: "PT Sans", "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--accent-pos);
+  text-decoration: none;
+  line-height: 1;
+  transition: transform 0.12s ease;
+}
+.home-btn:hover { transform: translateY(-1px); }
+.home-btn .arrow { font-family: "PT Mono", monospace; }
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+.theme-toggle:hover { transform: translateY(-1px); }
+
+.home-btn:focus-visible, .theme-toggle:focus-visible {
+  outline: 2px solid var(--accent-pos);
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .nb-nav { top: 12px; right: 12px; gap: 6px; }
+  .home-btn { padding: 7px 12px; font-size: 12px; }
+  .theme-toggle { width: 30px; height: 30px; font-size: 13px; }
+}
+
+@media print {
+  .table-scroll { overflow: visible; box-shadow: none; }
+  table { min-width: 0; width: 100%; font-size: 12px; }
+  thead th { white-space: normal; }
+  tbody tr, .concept, .sentence-card, .legend .item { break-inside: avoid; }
+  tr.group-row { break-after: avoid; }
+  section { break-inside: avoid-page; }
+  .nb-nav { display: none; }
+}
