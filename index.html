@@ -76,6 +76,13 @@
     flex: 1;
   }
 
+  .card .footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
   .card .open {
     font-family: "PT Mono", monospace;
     font-size: 13px;
@@ -83,6 +90,14 @@
   }
   .card.ru .open { color: var(--accent-pos); }
   .card.fr .open { color: var(--accent-mem); }
+
+  .card .date {
+    font-family: "PT Mono", monospace;
+    font-size: 12px;
+    font-weight: 700;
+    color: #22c55e;
+    white-space: nowrap;
+  }
 
   .card.planned {
     border-style: dashed;
@@ -115,7 +130,10 @@
         <span class="tag">Русский · грамматика</span>
         <h3>Части речи и члены предложения</h3>
         <p>Две системы классификации слов, их определения, вопросы и разбор одного предложения сразу по обеим — чтобы связь была видна физически.</p>
-        <span class="open">Открыть →</span>
+        <span class="footer-row">
+          <span class="open">Открыть →</span>
+          <span class="date">08.09.2026</span>
+        </span>
       </a>
 
       <div class="card planned">
